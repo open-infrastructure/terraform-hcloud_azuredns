@@ -18,7 +18,7 @@ resource "hcloud_server" "hcloud_host" {
 
 resource "hcloud_rdns" "hcloud_host_rDNS_v6" {
   server_id = hcloud_server.hcloud_host.id
-  ip_address = "${hcloud_server.hcloud_host.ipv6_address}1"
+  ip_address = "${hcloud_server.hcloud_host.ipv6_address}"
   dns_ptr = "${local.dns_name}.${var.az_dns_zone.name}"
 }
 
@@ -45,7 +45,7 @@ resource "azurerm_dns_aaaa_record" "hcloud_host_dns_entry" {
   zone_name           = var.az_dns_zone.name
   resource_group_name = var.az_dns_zone.resource_group_name
   ttl                 = 300
-  records             = ["${hcloud_server.hcloud_host.ipv6_address}1"]
+  records             = ["${hcloud_server.hcloud_host.ipv6_address}"]
 
   tags = {
     Environment = var.environment
