@@ -18,7 +18,7 @@ resource "hcloud_server" "hcloud_host" {
 
 resource "hcloud_rdns" "hcloud_host_rDNS_v6" {
   server_id = hcloud_server.hcloud_host.id
-  ip_address = "${hcloud_server.hcloud_host.ipv6_address}"
+  ip_address = hcloud_server.hcloud_host.ipv6_address
   dns_ptr = "${local.dns_name}.${var.az_dns_zone.name}"
 }
 
